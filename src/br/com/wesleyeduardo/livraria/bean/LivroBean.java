@@ -2,8 +2,12 @@ package br.com.wesleyeduardo.livraria.bean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 import br.com.wesleyeduardo.livraria.dao.DAO;
 import br.com.wesleyeduardo.livraria.modelo.Autor;
@@ -42,15 +46,33 @@ public class LivroBean {
 	public List<Autor> getAutoresDoLivro() {
 		return this.livro.getAutores();
 	}
+	
+	public List<Livro> getLivros() {
+		
+		return new DAO<Livro>(Livro.class).listaTodos();
+		
+	}
 
-	public void gravar() {
-		System.out.println("Gravando livro " + this.livro.getTitulo());
 
-		if (livro.getAutores().isEmpty()) {
-			throw new RuntimeException("Livro deve ter pelo menos um Autor.");
-		}
+    public void gravar() {
+        System.out.println("Gravando livro " + this.livro.getTitulo());
 
-		new DAO<Livro>(Livro.class).adiciona(this.livro);
+        if (livro.getAutores().isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage("autor",  new FacesMessage("Livro deve ter pelo menos um Autor"));
+            return;
+        } else {
+            new DAO<Livro>(Livro.class).adiciona(this.livro);
+            this.livro = new Livro();
+        }
+    }
+	
+	
+	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
+
+	    String valor = value.toString();
+	    if (!valor.startsWith("1")) {
+	        throw new ValidatorException(new FacesMessage("Deveria começar com 1"));
+	    }
 	}
 
 }
