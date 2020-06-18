@@ -40,6 +40,7 @@ public class LivroBean {
 	public void gravarAutor() {
 		Autor autor = new DAO<Autor>(Autor.class).buscaPorId(this.autorId);
 		this.livro.adicionaAutor(autor);
+		System.out.println("Escrito por " + autor.getNome());
 
 	}
 
