@@ -43,10 +43,14 @@
 			<h:selectOneMenu value="#{livroBean.autorId}" id="autor">
 				<f:selectItems value="#{livroBean.autores}" var="autor"	itemLabel="#{autor.nome}" itemValue="#{autor.id}" />
 			</h:selectOneMenu>
-
+			
 			<h:commandButton value="Gravar Autor" action="#{livroBean.gravarAutor}">
 				<f:ajax execute="autor" render="tabelaAutores"/>
 			</h:commandButton>
+			
+			<br />
+			
+			<h:commandLink value="Cadastrar novo autor" action="autor" />
 
 
 			<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor" id="tabelaAutores">
