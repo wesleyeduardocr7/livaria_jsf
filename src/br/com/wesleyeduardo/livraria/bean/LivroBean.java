@@ -75,5 +75,11 @@ public class LivroBean {
 	        throw new ValidatorException(new FacesMessage("Deveria começar com 1"));
 	    }
 	}
+	
+	
+	  public String formAutor() {
+	        System.out.println("Chamanda o formulario do Autor");
+	        return "autor?faces-redirect=true";
+	    }
 
 }
