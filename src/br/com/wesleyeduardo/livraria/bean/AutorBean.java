@@ -1,15 +1,10 @@
 package br.com.wesleyeduardo.livraria.bean;
-
 import java.util.List;
-
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-
 import br.com.wesleyeduardo.livraria.dao.DAO;
 import br.com.wesleyeduardo.livraria.modelo.Autor;
-import br.com.wesleyeduardo.livraria.modelo.Livro;
+
 
 @ManagedBean
 @ViewScoped
