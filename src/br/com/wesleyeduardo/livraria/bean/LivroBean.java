@@ -1,5 +1,6 @@
 package br.com.wesleyeduardo.livraria.bean;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -99,5 +100,20 @@ public class LivroBean {
 	        System.out.println("Chamanda o formulario do Autor");
 	        return "autor?faces-redirect=true";
 	    }
+	  
+	  
+	  public void removerAutorDoLivro(Autor autor) {
+		  
+		  System.out.println("Removendo autor do Livro...");		  
+		
+		  this.removeAutor(autor);
+		  
+	  }
+	  
+	  
+	  
+	  private void removeAutor(Autor autor) {
+		  this.livro.getAutores().remove(autor);	
+	  }
 
 }
