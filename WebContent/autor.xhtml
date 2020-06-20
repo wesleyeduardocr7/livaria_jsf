@@ -19,15 +19,42 @@
 				<legend>Dados do Autor</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome:" for="nome" />
-					<h:inputText id="nome" value="#{autorBean.autor.nome}"
-						required="true" requiredMessage="Informe o Nome do Autor"
-						validatorMessage="Nome deve ser maior que 1">
+					<h:inputText id="nome" value="#{autorBean.autor.nome}" required="true" requiredMessage="Informe o Nome do Autor" validatorMessage="Nome deve ser maior que 1">
 						<f:validateLength minimum="1" />
 					</h:inputText>
-					<h:commandButton value="Gravar" action="#{autorBean.gravar}" />
+					
+					<h:commandButton value="Gravar" action="#{autorBean.gravar}">
+						<f:ajax execute="@form"	render="@form :formTabelaAutores:tabelaAutores" />
+					</h:commandButton>
+					
 				</h:panelGrid>
 			</fieldset>
 		</h:form>
+		
+		
+		<h:form id="formTabelaAutores">
+
+			<h:dataTable value="#{autorBean.autores}" var="autor" id="tabelaAutores">
+
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{autor.nome}" />
+				</h:column>				
+				
+				<h:column>
+					<f:facet name="header">Alterar</f:facet>
+					<h:commandLink value="Alterar" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Remover</f:facet>
+					<h:commandLink value="Remover"/>
+				</h:column>
+
+			</h:dataTable>
+
+		</h:form>
+		
 	</ui:define>
 </ui:composition>
 </html>

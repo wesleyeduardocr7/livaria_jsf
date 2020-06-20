@@ -1,11 +1,18 @@
 package br.com.wesleyeduardo.livraria.bean;
 
+import java.util.List;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.wesleyeduardo.livraria.dao.DAO;
 import br.com.wesleyeduardo.livraria.modelo.Autor;
+import br.com.wesleyeduardo.livraria.modelo.Livro;
 
 @ManagedBean
+@ViewScoped
 public class AutorBean {
 
 	private Autor autor = new Autor();
@@ -14,15 +21,25 @@ public class AutorBean {
 		return autor;
 	}
 
-	public String gravar() {
-		System.out.println("Gravando autor " + this.autor.getNome());
+	public void gravar() {
+		
+		 System.out.println("Gravando Autor " + this.autor.getNome());
 
-		new DAO<Autor>(Autor.class).adiciona(this.autor);
-		
-		
-		this.autor.setNome("");
-		
-		return "livro?faces-redirect=true";
+		    
+		    if (this.autor.getId() == null) {
+		        new DAO<Autor>(Autor.class).adiciona(this.autor);        
+		    } else {
+		    	new DAO<Autor>(Autor.class).atualiza(this.autor);
+		    }
+
+		    this.autor = new Autor();
 		
 	}
+	
+	
+	public List<Autor> getAutores(){
+		
+		return new DAO<Autor>(Autor.class).listaTodos();		
+	}
+	
 }
