@@ -19,22 +19,33 @@
 
 	<ui:define name="conteudo">
 
-		<h:form>
-			<fieldset>
-				<legend>Dados do Autor</legend>
-				<h:panelGrid columns="2">
-					<h:outputLabel value="Nome:" for="nome" />
-					<h:inputText id="nome" value="#{autorBean.autor.nome}" required="true" requiredMessage="Informe o Nome do Autor" validatorMessage="Nome deve ser maior que 1">
-						<f:validateLength minimum="1" />
-					</h:inputText>
-					
-					<h:commandButton value="Gravar" action="#{autorBean.gravar}">
-						<f:ajax execute="@form"	render="@form :formTabelaAutores:tabelaAutores" />
-					</h:commandButton>
-					
-				</h:panelGrid>
-			</fieldset>
-		</h:form>
+	<h:form id="autor">
+    <fieldset>
+        <legend>Dados do Autor</legend>
+        <h:panelGrid columns="3">
+
+            <h:outputLabel value="Nome:" for="nome" />
+            <h:inputText id="nome" value="#{autorBean.autor.nome}"
+                required="true">
+                <f:validateLength minimum="5" />
+                <f:ajax event="blur" render="messageNome" />
+            </h:inputText>
+
+            <h:message for="nome" id="messageNome" />
+            
+
+            <h:outputLabel value="Email:" for="email" />
+            <h:inputText id="email" value="#{autorBean.autor.email}"
+                required="true">
+                <f:passThroughAttribute name="type" value="email" />
+            </h:inputText>
+
+            <h:message for="email" id="messageEmail" />
+
+            <h:commandButton value="Gravar" action="#{autorBean.gravar}" />
+        </h:panelGrid>
+    </fieldset>
+</h:form>
 		
 		
 		<h:form id="formTabelaAutores">
@@ -45,6 +56,11 @@
 					<f:facet name="header">Nome</f:facet>
 					<h:outputText value="#{autor.nome}" />
 				</h:column>				
+				
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{autor.email}" />
+				</h:column>	
 				
 				<h:column>
 					<f:facet name="header">Alterar</f:facet>
