@@ -8,6 +8,7 @@
 
    		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
+		<class>br.com.wesleyeduardo.livraria.modelo.Usuario</class>
 		<class>br.com.wesleyeduardo.livraria.modelo.Livro</class>
 		<class>br.com.wesleyeduardo.livraria.modelo.Autor</class>
 
