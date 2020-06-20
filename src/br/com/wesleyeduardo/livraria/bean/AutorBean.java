@@ -42,4 +42,23 @@ public class AutorBean {
 		return new DAO<Autor>(Autor.class).listaTodos();		
 	}
 	
+	
+	public void removeAutor(Autor autor) {
+		
+		System.out.println("Removento Autor...");
+		
+		new DAO<Autor>(Autor.class).remove(autor);
+		
+	}
+	
+	public void alteraAutor(Autor autor) {
+		
+		System.out.println("Alterando Autor...");
+		
+		this.autor = autor;
+		
+	}
+	
+	
+	
 }
