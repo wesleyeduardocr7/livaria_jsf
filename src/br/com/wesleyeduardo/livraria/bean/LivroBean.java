@@ -55,23 +55,36 @@ public class LivroBean {
 	}
 
 
-    public void gravar() {
-        System.out.println("Gravando livro " + this.livro.getTitulo());
+	public void gravar() {
+	    System.out.println("Gravando livro " + this.livro.getTitulo());
 
-        if (livro.getAutores().isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage("autor",  new FacesMessage("Livro deve ter pelo menos um Autor"));
-            return;
-        } else {
-            new DAO<Livro>(Livro.class).adiciona(this.livro);
-            this.livro = new Livro();
-        }
-    }
+	    if (livro.getAutores().isEmpty()) {
+	        FacesContext.getCurrentInstance().addMessage("autor",
+	                new FacesMessage("Livro deve ter pelo menos um Autor."));
+	        return;
+	    }
+
+	    if (this.livro.getId() == null) {
+	        new DAO<Livro>(Livro.class).adiciona(this.livro);        
+	    } else {
+	        new DAO<Livro>(Livro.class).atualiza(this.livro);
+	    }
+
+	    this.livro = new Livro();
+	}
     
     public void remover(Livro livro) {
         System.out.println("Removendo livro " + livro.getTitulo());
         new DAO<Livro>(Livro.class).remove(livro);            
     }
 	
+    public void carregar(Livro livro) {
+    	
+    	System.out.println("Carregando Livro...");
+    	
+    	this.livro = livro;    	
+    	
+    }
 	
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
 

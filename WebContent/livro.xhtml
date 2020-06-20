@@ -69,8 +69,7 @@
 					action="#{livroBean.formAutor}" immediate="true" />
 
 
-				<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor"
-					id="tabelaAutores">
+				<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor" id="tabelaAutores">
 					<h:column>
 						<h:outputText value="#{autor.nome}" />
 					</h:column>
@@ -80,16 +79,14 @@
 
 
 			<h:commandButton value="Gravar" action="#{livroBean.gravar}">
-				<f:ajax execute="@form"
-					render="@form :formTabelaLivros:tabelaLivros" />
+				<f:ajax execute="@form"	render="@form :formTabelaLivros:tabelaLivros" />
 			</h:commandButton>
 
 		</h:form>
 
 		<h:form id="formTabelaLivros">
 
-			<h:dataTable value="#{livroBean.livros}" var="livro"
-				id="tabelaLivros">
+			<h:dataTable value="#{livroBean.livros}" var="livro" id="tabelaLivros">
 
 				<h:column>
 					<f:facet name="header">Titulo</f:facet>
@@ -104,8 +101,7 @@
 				<h:column>
 					<f:facet name="header">Preço</f:facet>
 					<h:outputText value="#{livro.preco}">
-						<f:convertNumber type="currency" pattern="R$ #0.00"
-							currencySymbol="R$" locale="pt_BR" />
+						<f:convertNumber type="currency" pattern="R$ #0.00" currencySymbol="R$" locale="pt_BR" />
 					</h:outputText>
 				</h:column>
 
@@ -116,7 +112,12 @@
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</h:column>
-
+				
+				<h:column>
+					<f:facet name="header">Alterar</f:facet>
+					<h:commandLink value="Alterar" action="#{livroBean.carregar(livro)}"/>
+				</h:column>
+				
 				<h:column>
 					<f:facet name="header">Remover</f:facet>
 					<h:commandLink value="Remover" action="#{livroBean.remover(livro)}"/>
